@@ -238,7 +238,7 @@ function hideLoaderChar() {
 }
 function hideLoader() {
     charDetails.innerHTML = ``;
-    // extraButns.innerHTML = ``;
+    extraButns.innerHTML = ``;
     extraInfo.innerHTML = ``;
 }
 
