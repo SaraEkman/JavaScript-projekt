@@ -10,22 +10,17 @@ let extraButns = document.querySelector(".extra-butns");
 let wrapperChar = document.querySelector(".wrapper-Char");
 let activePageNow = 1;
 
-// extraButns.insertAdjacentHTML("afterbegin", "<button id='planet'>Planet</button><button id='species'>Species</button><button id='vehicles'>Vehicles</button><button id='starships'>Starships</button>"
-// );
-
-extraButns.innerHTML = `<button id='planet'>Planet</button><button id='species'>Species</button><button id='vehicles'>Vehicles</button><button id='starships'>Starships</button>`;
-
 
 async function fetchList() {
     activePage.innerHTML = activePageNow;
     PageRender();
     showLoaderChar();
-
-    // charsListLoader(true);
+    // showLoader()
     const request = await fetch("https://swapi.dev/api/people/?page=" + activePageNow);
     const data = await request.json();
     hideLoaderChar();
     renderData(data.results);
+    // hideLoader();
     console.log(activePageNow);
     console.log(data);
 
@@ -34,14 +29,17 @@ async function fetchList() {
 function renderData(data) {
     for (let user of data) {
         const liChar = document.createElement("li");
+        liChar.className = ('list-hover')
         liChar.innerText = `${user.name}`;
         charList.append(liChar);
 
 
         liChar.addEventListener("click", function () {
             const liDetails = charDetails;
-            showLoader();
+
             removeList(charDetails);
+            showLoader();
+            extraButnsShow();
             liDetails.innerHTML = `
                 <h3>${user.name}</h3>
                 <p>Height: ${user.height}</p>
@@ -51,12 +49,11 @@ function renderData(data) {
                 <p>Eye color: ${user.eye_color}</p>
                 <p>Birth year: ${user.birth_year}</p>
                 <p>Gender: ${user.gender}</p>`;
-
+        
             charPlanet(user);
+            removeList(extraInfo);
+            renderButns(user);
         });
-        removeList(extraInfo);
-        renderButns(user);
-        // charsListLoader(false);
     }
 }
 
@@ -66,7 +63,7 @@ function buttonActions() {
         activePageNow--;
         removeList(charList);
         fetchList();
-        // showLoader();
+        showLoader();
         PageRender();
         // console.log(activePageNow);
     });
@@ -75,7 +72,7 @@ function buttonActions() {
         activePageNow++;
         removeList(charList);
         fetchList();
-        // showLoader();
+        showLoader();
         PageRender();
         // console.log(activePageNow);
     });
@@ -95,6 +92,7 @@ function PageRender() {
 async function charPlanet(user) {
     try {
         removeList(extraInfo);
+       
         const homeworld = await fetch(user.homeworld);
         const homeworldData = await homeworld.json();
 
@@ -225,10 +223,10 @@ function showLoader() {
     <div class="loading detalils"><div>
     </div>
     `;
-    extraInfo.innerHTML = `
+     extraInfo.innerHTML = `
       <div class="load-container">
-      <div class="loading detalils"><div>
-      </div>     
+     <div class="loading detalils"><div>
+     </div>     
     `;
 }
 
@@ -238,7 +236,7 @@ function hideLoaderChar() {
 }
 function hideLoader() {
     charDetails.innerHTML = ``;
-    extraButns.innerHTML = ``;
+    // extraButns.innerHTML = ``;
     extraInfo.innerHTML = ``;
 }
 
@@ -276,7 +274,7 @@ function renderButns(user) {
 function main() {
     fetchList();
     showLoader();
-    extraButnsShow();
+
     buttonActions();
 }
 main();

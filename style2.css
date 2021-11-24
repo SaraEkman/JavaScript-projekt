@@ -159,14 +159,29 @@ ul {
   font-size: 1.25rem;
   margin-bottom: 0.5em;
 }
+
+/****** hover *****/
+
 .first-article ul > li {
   padding-top: 0.6rem;
   padding-left: 0.8rem;
   font-size: 1.4rem;
+  position: relative;
 }
-.first-article ul > li:hover {
-  cursor: pointer;
+
+.first-article ul > li:after {
+  content: '»';
+  position: absolute;
+  margin-left: 5px;
+  transition: margin 0.5s ease-in-out;
 }
+
+.first-article ul > li:hover::after {
+  margin-left: 15px;
+  transition: margin 0.5s ease-in-out;
+}
+
+/******************/
 
 .second-article div {
   padding-left: 0.8rem;
@@ -218,15 +233,15 @@ ul {
   background-image: url(/bild/puff.svg);
   background-size: cover;
   background-repeat: no-repeat;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   animation: loading-spinner 100s linear infinite;
 }
 .char {
   margin-top: 40%;
 }
 .detalils {
-  margin-top: 20%;
+  margin-top: 15%;
 }
 
 .spinner-div {
