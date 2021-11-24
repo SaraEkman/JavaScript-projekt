@@ -1,1 +1,2 @@
-# JavaScript-projekt
+# Native JavaScript-Slutprojekt
+## Iths yrkeshögskola
