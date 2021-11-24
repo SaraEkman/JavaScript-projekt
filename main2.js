@@ -49,7 +49,6 @@ function renderData(data) {
                 <p>Eye color: ${user.eye_color}</p>
                 <p>Birth year: ${user.birth_year}</p>
                 <p>Gender: ${user.gender}</p>`;
-        
             charPlanet(user);
             removeList(extraInfo);
             renderButns(user);

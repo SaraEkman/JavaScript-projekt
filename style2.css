@@ -230,7 +230,7 @@ ul {
 }
 
 .loading {
-  background-image: url(/bild/puff.svg);
+  background-image: url(bild/puff.svg);
   background-size: cover;
   background-repeat: no-repeat;
   width: 80px;
